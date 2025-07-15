@@ -1,0 +1,10 @@
+pandas
+matplotlib
+seaborn
+scikit-learn
+ipykernel
+numpy
+streamlit
+flask
+datetime
+-e .

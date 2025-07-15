@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fraud Detection</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('{{ url_for("static", filename="fraud_bg.jpg") }}');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .form-container {
+      background-color:rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      width: 100%;
+    }
+    .form-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 12px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .form-group input,
+    .form-group select {
+      width: 95%;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-group input[type="submit"] {
+      background-color: #28a745;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2 class="form-title">Fraud Detection Form</h2>
+    <form action="{{ url_for('predict_datapoint') }}" method="post">
+      <div class="form-group"><label>cc_num:</label><input type="text" name="cc_num"></div>
+      <div class="form-group"><label>amt:</label><input type="text" name="amt"></div>
+      <div class="form-group"><label>zip:</label><input type="text" name="zip"></div>
+      <div class="form-group"><label>lat:</label><input type="text" name="lat"></div>
+      <div class="form-group"><label>long:</label><input type="text" name="long"></div>
+      <div class="form-group"><label>city_pop:</label><input type="text" name="city_pop"></div>
+      <div class="form-group"><label>unix_time:</label><input type="text" name="unix_time"></div>
+      <div class="form-group"><label>merch_lat:</label><input type="text" name="merch_lat"></div>
+      <div class="form-group"><label>merch_long:</label><input type="text" name="merch_long"></div>
+      <div class="form-group"><label>user_transaction_count:</label><input type="text" name="user_transaction_count"></div>
+      <div class="form-group"><label>merchant_transaction_count:</label><input type="text" name="merchant_transaction_count"></div>
+      <div class="form-group"><label>merchant:</label><input type="text" name="merchant"></div>
+      <div class="form-group"><label>category:</label><input type="text" name="category"></div>
+      <div class="form-group"><label>first name:</label><input type="text" name="first"></div>
+      <div class="form-group"><label>last name:</label><input type="text" name="last"></div>
+      <div class="form-group"><label>gender:</label>
+        <select name="gender">
+          <option value="M">M</option>
+          <option value="F">F</option>
+        </select>
+      </div>
+      <div class="form-group"><label>street:</label><input type="text" name="street"></div>
+      <div class="form-group"><label>city:</label><input type="text" name="city"></div>
+      <div class="form-group"><label>state:</label><input type="text" name="state"></div>
+      <div class="form-group"><label>job:</label><input type="text" name="job"></div>
+      <div class="form-group"><label>dob (YYYY-MM-DD):</label><input type="text" name="dob"></div>
+      <div class="form-group"><label>date (YYYY-MM-DD):</label><input type="text" name="date"></div>
+      <div class="form-group"><label>time (HH:MM:SS):</label><input type="text" name="time"></div>
+
+      <div class="form-group">
+        <input type="submit" value="Predict">
+      </div>
+    </form>
+
+    {% if final_result %}
+      <center><p style="font-weight: bold; font-size: large;">Fraud Prediction: {{ final_result }}</p></center>
+    {% endif %}
+  </div>
+</body>
+</html>
